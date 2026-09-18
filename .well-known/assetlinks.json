@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.zyratech.samvidha",
+      "sha256_cert_fingerprints": [
+        "18:14:1C:CE:D7:93:1C:EB:FE:DA:82:69:66:9A:F0:4B:92:2C:9E:0E:64:1C:C6:BE:5E:FE:91:0A:79:FB:5E:2B"
+      ]
+    }
+  }
+]

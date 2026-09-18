@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Samvidha Events | IARE</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Samvidha Events | Institute of Aeronautical Engineering">
+  <meta name="description" content="Discover campus events, technical hackathons, workshops, and fests at IARE on Samvidha.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="https://img.icons8.com/fluency/96/event-accepted.png" type="image/png">
+
+  <!-- Fonts & QR Lib -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-glow top-left"></div>
+  <div class="background-glow bottom-right"></div>
+
+  <div class="container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 17L12 22L22 17" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="brand-name">SAMVIDHA <span class="badge-tag">IARE</span></span>
+      </div>
+      <button class="nav-btn" id="header-open-app-btn">Open App</button>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="content-grid">
+      <!-- Left / Top: Event Card -->
+      <section class="event-card">
+        <div class="poster-wrapper" id="poster-container">
+          <div class="poster-overlay"></div>
+          <img id="event-image" src="" alt="Event Poster" class="poster-img" style="display: none;">
+          <div id="poster-placeholder" class="poster-placeholder">
+            <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Campus Event</span>
+          </div>
+          <div class="category-badge" id="event-category">CAMPUS EVENT</div>
+        </div>
+
+        <div class="event-body">
+          <div class="club-chip" id="event-club" style="display: none;">IARE Club</div>
+          <h1 class="event-title" id="event-title">Loading Event Details...</h1>
+          <p class="event-subtitle" id="event-subtitle">Connecting to Samvidha campus hub...</p>
+
+          <!-- Key Meta Badges -->
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-icon date-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div class="meta-text">
+                <span class="meta-label">Date & Time</span>
+                <span class="meta-value" id="event-date">Upcoming</span>
+              </div>
+            </div>
+
+            <div class="meta-item">
+              <div class="meta-icon venue-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="meta-text">
+                <span class="meta-label">Venue</span>
+                <span class="meta-value" id="event-venue">IARE Campus</span>
+              </div>
+            </div>
+
+            <div class="meta-item" id="team-meta" style="display: none;">
+              <div class="meta-icon team-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="meta-text">
+                <span class="meta-label">Format</span>
+                <span class="meta-value" id="event-format">Team</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description Section -->
+          <div class="description-section">
+            <h3>About This Event</h3>
+            <p id="event-description" class="desc-text">
+              Opening directly in Samvidha App for registration passes, team formation, and notifications.
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button class="btn btn-primary" id="open-app-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Open in Samvidha App</span>
+            </button>
+            <button class="btn btn-secondary" id="copy-link-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Copy Link</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right / Bottom: Deep Link & QR Code Assistant Card -->
+      <aside class="sidebar-card">
+        <div class="qr-container">
+          <div class="qr-box" id="qrcode"></div>
+          <p class="qr-label">Scan with phone camera to open event instantly</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="app-promo">
+          <h4>Don't have Samvidha App yet?</h4>
+          <p>Get the official student companion for attendance, timetable, event tickets, and campus fests.</p>
+          <div class="download-chips">
+            <a href="https://github.com/nithin-chatla/samvidha-advanced-backend/releases/latest" class="chip-btn" id="download-apk-btn" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Get Android App
+            </a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; <span id="year"></span> Samvidha • Institute of Aeronautical Engineering</p>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Link copied to clipboard!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
