@@ -1,5 +1,8 @@
 // Samvidha Instant Deep-Link Bridge Engine
 (function () {
+  const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.zyratech.samvidha';
+  const encodedFallback = encodeURIComponent(playStoreUrl);
+
   const urlParams = new URLSearchParams(window.location.search);
   let eventId = urlParams.get('id') || '';
   let route = urlParams.get('route') || '';
@@ -12,16 +15,16 @@
     }
   }
 
-  // Construct target deep link URIs
+  // Construct target deep link URIs with embedded Play Store fallback
   let customSchemeUri = 'samvidha://app';
-  let intentUri = 'intent://app#Intent;scheme=samvidha;package=com.zyratech.samvidha;end';
+  let intentUri = `intent://app#Intent;scheme=samvidha;package=com.zyratech.samvidha;S.browser_fallback_url=${encodedFallback};end`;
 
   if (eventId) {
     customSchemeUri = `samvidha://event?id=${encodeURIComponent(eventId)}`;
-    intentUri = `intent://event?id=${encodeURIComponent(eventId)}#Intent;scheme=samvidha;package=com.zyratech.samvidha;end`;
+    intentUri = `intent://event?id=${encodeURIComponent(eventId)}#Intent;scheme=samvidha;package=com.zyratech.samvidha;S.browser_fallback_url=${encodedFallback};end`;
   } else if (route) {
     customSchemeUri = `samvidha://${route}`;
-    intentUri = `intent://${route}#Intent;scheme=samvidha;package=com.zyratech.samvidha;end`;
+    intentUri = `intent://${route}#Intent;scheme=samvidha;package=com.zyratech.samvidha;S.browser_fallback_url=${encodedFallback};end`;
   }
 
   // Set up button link
@@ -38,37 +41,44 @@
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const isMobile = isAndroid || isIOS;
 
+  let hasLeftPage = false;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) hasLeftPage = true;
+  });
+  window.addEventListener('pagehide', () => { hasLeftPage = true; });
+  window.addEventListener('blur', () => { hasLeftPage = true; });
+
   function executeRedirect() {
     if (isAndroid) {
+      // 1. Trigger Android Intent (Android opens app if installed, or redirects to browser_fallback_url)
       window.location.href = intentUri;
+
+      // 2. JavaScript fallback: if user is still on this webpage after 1.2s, forward directly to Google Play
       setTimeout(() => {
-        window.location.href = customSchemeUri;
-      }, 300);
+        if (!hasLeftPage && !document.hidden) {
+          window.location.href = playStoreUrl;
+        }
+      }, 1200);
     } else if (isIOS) {
       window.location.href = customSchemeUri;
+      setTimeout(() => {
+        if (!hasLeftPage && !document.hidden) {
+          window.location.href = playStoreUrl;
+        }
+      }, 1200);
     } else {
       window.location.href = customSchemeUri;
     }
   }
 
-  // Auto-launch deep link immediately on mobile
+  // Auto-launch deep link immediately on mobile devices
   if (isMobile && !urlParams.get('noredirect')) {
     executeRedirect();
-
-    // If still on page after 2.5 seconds, user probably doesn't have the app
-    setTimeout(() => {
-      const statusEl = document.getElementById('redirect-status');
-      const redirectBox = document.getElementById('redirect-box');
-      if (statusEl && redirectBox) {
-        statusEl.textContent = 'Tap below to download from Google Play';
-        redirectBox.style.color = '#34d399';
-      }
-    }, 2500);
   } else {
     // Desktop: Show QR Code
     const statusEl = document.getElementById('redirect-status');
     if (statusEl) {
-      statusEl.textContent = 'Scan QR or open on your Android phone';
+      statusEl.textContent = 'Scan QR on phone or download from Play Store';
     }
   }
 
