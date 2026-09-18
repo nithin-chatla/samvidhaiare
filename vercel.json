@@ -1,37 +1,21 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "headers": [
+  "routes": [
     {
-      "source": "/.well-known/assetlinks.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/event",
-      "destination": "/index.html"
+      "src": "/.well-known/assetlinks.json",
+      "headers": {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      "dest": "/.well-known/assetlinks.json"
     },
     {
-      "source": "/e/:id",
-      "destination": "/index.html"
+      "src": "/(style\\.css|app\\.js|logo\\.png)",
+      "dest": "/$1"
     },
     {
-      "source": "/event/:id",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
